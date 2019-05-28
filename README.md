@@ -1,4 +1,4 @@
-# PyWeather
+# PyWeather:sunny:
 - Web app helping in travelling, Just enter your city name and you are done!.
 - This is a web app which helps a tourist to know the climatic conditions of a place he wants to visit.
 - It also gives info about the precautions to be taken according to the weather and the things to carry at the intended place.
