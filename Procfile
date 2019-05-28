@@ -1,0 +1,1 @@
+web: gunicorn pyweather.wsgi --log-file -
