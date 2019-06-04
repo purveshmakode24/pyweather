@@ -4,16 +4,16 @@
 {% endblock %}
 
 {% block content %}
-    <div class="col-m">
-        <div class="p-4">
-            <h1 class="display-1">404</h1>
+    <div style="background-color: #ffffff">
+        <div style="padding:40px; font-size: 70px; color:rgba(0,0,0,0.84) ">
+            <h1>404</h1>
         </div>
 
-        <div class="p-4">
-            <h1 class="display-4">We couldn’t find what you are looking for. or Enter a Valid City Name :)</h1>
+        <div style="padding:0px 0px 40px 40px ; font-size: 50px; color:rgba(0,0,0,0.54)">
+            <h4>We couldn’t find what you are looking for...<br>Enter a Valid City Name :)</h4>
         </div>
-        <div class="p-4">
-           <h6>You can always find accurate weather data on just a click <a href="{% url 'home-pyweather' %}">Home</a> ..</h6>
+        <div style="padding:40px; margin-bottom: 215px; font-size: 30px;">
+           <h5>You can always find accurate weather data on just a click <a href="{% url 'home-pyweather' %}">Home</a> !</h5>
         </div>
     </div>
 {% endblock %}
