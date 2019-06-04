@@ -1,6 +1,6 @@
 import requests
 import datetime
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 
 
@@ -211,4 +211,10 @@ def weather_details(request):
                 'date_month_of_cal': datetime.datetime.fromtimestamp(r['dt']).strftime("%d %b"),
             }
         print(dict1)
-        return render(request, 'index.html', dict1)
+    else:
+        return redirect('error_404')
+    return render(request, 'index.html', dict1)
+
+
+def error_404(request):
+    return render(request, '404.html')
