@@ -6,7 +6,8 @@ from django.http import HttpResponse
 
 # Create your views here.
 def weather(request):
-    url = 'https://api.openweathermap.org/data/2.5/weather?q={}&units=metric&appid=66b1fdc61a1a4198702b3fafc52537b2'
+    # your API key goes in appid filed :)
+    url = 'https://api.openweathermap.org/data/2.5/weather?q={}&units=metric&appid=************************'
     location = 'Delhi'
     r = requests.get(url.format(location)).json()
     print(r)
