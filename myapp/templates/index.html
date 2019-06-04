@@ -3,7 +3,7 @@
 {% block content %}
 <div class="hero" data-bg-image="{% static 'images/banner.png' %}">
     <div class="container">
-        <form action="/weather_details" method="POST" class="find-location">
+        <form action="{% url 'weather_details' %}" method="POST" class="find-location">
             {% csrf_token %}
             <input type="text" name="city" placeholder="Find your location..."
                    onkeyup="this.value = this.value.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();})"

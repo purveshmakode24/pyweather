@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block title %}
+    <title>Not Found - PyWeather</title>
+{% endblock %}
+
+{% block content %}
+    <div class="col-m">
+        <div class="p-4">
+            <h1 class="display-1">404</h1>
+        </div>
+
+        <div class="p-4">
+            <h1 class="display-4">We couldn’t find what you are looking for. or Enter a Valid City Name :)</h1>
+        </div>
+        <div class="p-4">
+           <h6>You can always find accurate weather data on just a click <a href="{% url 'home-pyweather' %}">Home</a> ..</h6>
+        </div>
+    </div>
+{% endblock %}
