@@ -1,115 +1,165 @@
 {% extends 'base.html' %}
 {% load static %}
+
+{% block title %}
+    {% if error_main == 'Invalid City Name' %}
+        <title>PyWeather: error 404</title>
+    {% else %}
+        <title>PyWeather: {{ location }}</title>
+    {% endif %}
+{% endblock %}
+
 {% block content %}
-<div class="hero" data-bg-image="{% static 'images/banner.png' %}">
-    <div class="container">
-        <form action="{% url 'weather_details' %}" method="POST" class="find-location">
-            {% csrf_token %}
-            <input type="text" name="city" placeholder="Find your location..."
-                   onkeyup="this.value = this.value.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();})"
-                   required>
-            <input type="submit" value="Find">
-        </form>
-    </div>
-</div>
-<div class="forecast-table">
-    <div class="container">
-        <div class="forecast-container">
-            <div class="today forecast">
-                <div class="forecast-header">
-                    <div class="day">{{ day_of_cal }}</div>
-                    <div class="date">{{ date_month_of_cal }}</div>
-                </div> <!-- .forecast-header -->
-                <div class="forecast-content">
-                    <div class="location"><span
-                            style="font-size: 30px; margin-bottom: -12px">{{ location }}</span>{{ description }}</div>
-                    <div class="degree">
-                        <div class="num">{{ temperature }}<sup>o</sup>C</div>
-                        <div class="forecast-icon">
-                            <img src="http://openweathermap.org/img/w/{{ icon }}.png" alt="" height="90px">
-                        </div>
-                    </div>
-
-                    <span title="Humidity"><img src="{% static 'images/icon-umberella.png' %}"
-                                                alt="humidity">{{ humidity }}%</span>
-                    <span title="Wind Speed"><img src="{% static 'images/icon-wind.png' %}"
-                                                  alt="w_speed">{{ wind_speed }}m/s</span>
-                    <span title="Max Temperature"><img src="{% static 'images/icon-compass.png' %}"
-                                                       alt="w_deg">{{ temp_max }}<sup>o</sup>C max</span>
-                </div>
-            </div>
-
-            <div class="today forecast">
-                <div class="forecast-header">
-                    <div class="day">Precautions to be taken:</div>
-                    <!-- 	<div class="date">6 Oct</div> -->
-                </div> <!-- .forecast-header -->
-                <div class="forecast-content">
-                    <ul class="arrow-feature">
-                        <li>
-                            <h3>{{ red1 }}</h3>
-                        </li>
-                        <li>
-                            <h3>{{ red2 }}</h3>
-                        </li>
-                        <li>
-                            <h3>{{ red3 }}</h3>
-                        </li>
-                        <li>
-                            <h3>{{ red4 }}</h3>
-                        </li>
-                        <li>
-                            <h3>{{ red5 }}</h3>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<main class="main-content">
-    <div class="fullwidth-block">
+    <div class="hero" data-bg-image="{% static 'images/banner.png' %}">
         <div class="container">
-            <div class="row">
-                <div class="col-md-4">
-                    <h2 class="section-title">Application features</h2>
-                    <ul class="arrow-feature">
-                        <li>
-                            {#                                <h3>Web app helping in travelling,</h3>#}
-                            <p><a href="#" style="outline: none;">Web app helping in travelling, Just enter your city
-                                name and you are done!</a></p>
-                            {#                                <p>Doloremque laudantium totam rem aperiam Inventore veritatis et quasi architecto#}
-                            {#                                    beatae vitae.</p>#}
-                        </li>
-                        <li>
-                            <p><a href="#" style="outline: none;">This is a web app which helps a tourist to know the
-                                climatic conditions of a place he wants to visit.</a></p>
-                            {#                                <p>Doloremque laudantium totam rem aperiam Inventore veritatis et quasi architecto#}
-                            {#                                    beatae vitae.</p>#}
-                        </li>
-                        <li>
-                            <p><a href="#" style="outline: none;">It also gives info about the precautions to be taken
-                                according to the weather and the things to carry at the intended place.</a></p>
-                            {#                                <p>Doloremque laudantium totam rem aperiam Inventore veritatis et quasi architecto#}
-                            {#                                    beatae vitae.</p>#}
-                        </li>
-                    </ul>
+            <form action="{% url 'weather_details' %}" method="POST" class="find-location">
+                {% csrf_token %}
+                <input type="text" name="city" placeholder="Find your location..."
+                       onkeyup="this.value = this.value.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();})"
+                       required>
+                <input type="submit" value="Find">
+            </form>
+        </div>
+    </div>
+    <div class="forecast-table">
+        <div class="container">
+            <div class="forecast-container">
+                <div class="today forecast">
+                    {% if error_main == 'Invalid City Name' %}
+                        <div class="forecast-header">
+                            <div class="day">Error</div>
+                            {#                            <div class="date">{{ date_month_of_cal }}</div>#}
+                        </div> <!-- .forecast-header -->
+
+                        <div class="forecast-content">
+                            <div class="location"><span
+                                    style="font-size: 30px; margin-bottom: -12px">{{ location }}</span>{{ description }}
+                            </div>
+                            <div class="degree">
+                                <div class="display-4">{{ error_main }} :(</div>
+                                <div class="forecast-icon">
+                                    <img src="http://openweathermap.org/img/w/{{ icon }}.png" alt="" height="90px">
+                                </div>
+                            </div>
+
+                            <span title="Humidity"><img src="{% static 'images/icon-umberella.png' %}"
+                                                        alt="humidity"><i class="text-muted">N/A</i></span>
+                            <span title="Wind Speed"><img src="{% static 'images/icon-wind.png' %}"
+                                                          alt="w_speed"><i class="text-muted">N/A</i></span>
+                            <span title="Max Temperature"><img src="{% static 'images/icon-compass.png' %}"
+                                                               alt="w_deg"><i class="text-muted">N/A</i></span>
+                        </div>
+                    {% else %}
+                        <div class="forecast-header">
+                            <div class="day">{{ day_of_cal }}</div>
+                            <div class="date">{{ date_month_of_cal }}</div>
+                        </div> <!-- .forecast-header -->
+
+                        <div class="forecast-content">
+                            <div class="location"><span
+                                    style="font-size: 30px; margin-bottom: -12px">{{ location }}</span>{{ description }}
+                            </div>
+                            <div class="degree">
+                                <div class="num">{{ temperature }}<sup>o</sup>C</div>
+                                <div class="forecast-icon">
+                                    <img src="http://openweathermap.org/img/w/{{ icon }}.png" alt="" height="90px">
+                                </div>
+                            </div>
+
+                            <span title="Humidity"><img src="{% static 'images/icon-umberella.png' %}"
+                                                        alt="humidity">{{ humidity }}%</span>
+                            <span title="Wind Speed"><img src="{% static 'images/icon-wind.png' %}"
+                                                          alt="w_speed">{{ wind_speed }}m/s</span>
+                            <span title="Max Temperature"><img src="{% static 'images/icon-compass.png' %}"
+                                                               alt="w_deg">{{ temp_max }}<sup>o</sup>C max</span>
+                        </div>
+                    {% endif %}
                 </div>
-                <div class="col-md-4">
-                    <h2 class="section-title">Weather analysis</h2>
-                    <ul class="arrow-feature">
-                        <li><p>Accurate and detailed forecast using Open Weather Map's API.</p></li>
-                        <li><p>Open-weather Map’s API, enables us to access current weather data for any location
-                            including over 200,000 cities.</p></li>
-                        <li><p>Current weather is frequently updated based on global models and data from more than
-                            40,000 weather stations.</p></li>
-                        <li><p>Forecast Data is available in JSON.</p></li>
-                    </ul>
+
+                <div class="today forecast">
+                    <div class="forecast-header">
+                        <div class="day">Precautions to be taken:</div>
+                        <!-- 	<div class="date">6 Oct</div> -->
+                    </div> <!-- .forecast-header -->
+                    {% if error_main == 'Invalid City Name' %}
+                        <div class="forecast-content">
+                            <ul class="arrow-feature">
+                                <li>
+                                    <h3>Please Enter a Valid City Name</h3>
+                                </li>
+                            </ul>
+                        </div>
+                    {% else %}
+                        <div class="forecast-content">
+                            <ul class="arrow-feature">
+                                <li>
+                                    <h3>{{ red1 }}</h3>
+                                </li>
+                                <li>
+                                    <h3>{{ red2 }}</h3>
+                                </li>
+                                <li>
+                                    <h3>{{ red3 }}</h3>
+                                </li>
+                                <li>
+                                    <h3>{{ red4 }}</h3>
+                                </li>
+                                <li>
+                                    <h3>{{ red5 }}</h3>
+                                </li>
+                            </ul>
+                        </div>
+                    {% endif %}
                 </div>
             </div>
         </div>
     </div>
-</main> <!-- .main-content -->
+    <main class="main-content">
+        <div class="fullwidth-block">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4">
+                        <h2 class="section-title">Application features</h2>
+                        <ul class="arrow-feature">
+                            <li>
+                                {#                                <h3>Web app helping in travelling,</h3>#}
+                                <p><a href="#" style="outline: none;">Web app helping in travelling, Just enter your
+                                    city
+                                    name and you are done!</a></p>
+                                {#                                <p>Doloremque laudantium totam rem aperiam Inventore veritatis et quasi architecto#}
+                                {#                                    beatae vitae.</p>#}
+                            </li>
+                            <li>
+                                <p><a href="#" style="outline: none;">This is a web app which helps a tourist to know
+                                    the
+                                    climatic conditions of a place he wants to visit.</a></p>
+                                {#                                <p>Doloremque laudantium totam rem aperiam Inventore veritatis et quasi architecto#}
+                                {#                                    beatae vitae.</p>#}
+                            </li>
+                            <li>
+                                <p><a href="#" style="outline: none;">It also gives info about the precautions to be
+                                    taken
+                                    according to the weather and the things to carry at the intended place.</a></p>
+                                {#                                <p>Doloremque laudantium totam rem aperiam Inventore veritatis et quasi architecto#}
+                                {#                                    beatae vitae.</p>#}
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-md-4">
+                        <h2 class="section-title">Weather analysis</h2>
+                        <ul class="arrow-feature">
+                            <li><p>Accurate and detailed forecast using Open Weather Map's API.</p></li>
+                            <li><p>Open-weather Map’s API, enables us to access current weather data for any location
+                                including over 200,000 cities.</p></li>
+                            <li><p>Current weather is frequently updated based on global models and data from more than
+                                40,000 weather stations.</p></li>
+                            <li><p>Forecast Data is available in JSON.</p></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main> <!-- .main-content -->
 
 {% endblock %}
 
