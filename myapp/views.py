@@ -1,3 +1,4 @@
+import os
 import requests
 import datetime
 from django.shortcuts import render, redirect
@@ -6,8 +7,8 @@ from django.shortcuts import render, redirect
 # Create your views here.
 def weather(request):
     # your API key goes in appid filed :)
-
-    url = 'https://api.openweathermap.org/data/2.5/weather?q={}&units=metric&appid=66b1fdc61a1a4198702b3fafc52537b2'
+    api_key = os.environ.get('OWM_API')
+    url = 'https://api.openweathermap.org/data/2.5/weather?q={}&units=metric&appid='+api_key
     location = 'New Delhi'
     r = requests.get(url.format(location)).json()
     print(r)
