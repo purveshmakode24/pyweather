@@ -8,7 +8,7 @@ def weather(request):
     # your API key goes in appid filed :)
 
     url = 'https://api.openweathermap.org/data/2.5/weather?q={}&units=metric&appid=66b1fdc61a1a4198702b3fafc52537b2'
-    location = 'Delhi'
+    location = 'New Delhi'
     r = requests.get(url.format(location)).json()
     print(r)
     dict1 = {

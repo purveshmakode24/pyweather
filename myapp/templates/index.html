@@ -32,11 +32,15 @@
                         </div> <!-- .forecast-header -->
 
                         <div class="forecast-content">
+
+{#                            <div class="display-4">{{ error_main }}</div>#}
                             <div class="location"><span
-                                    style="font-size: 30px; margin-bottom: -12px">{{ location }}</span>{{ description }}
-                            </div>
+                                        style="font-size: 30px; margin-bottom: -12px">{{ error_main }}</span>
+                                </div>
                             <div class="degree">
-                                <div class="display-4">{{ error_main }} :(</div>
+                                <div class="location"><span
+                                        style="font-size: 30px; margin-bottom: -12px">:(</span>
+                                </div>
                                 <div class="forecast-icon">
                                     <img src="http://openweathermap.org/img/w/{{ icon }}.png" alt="" height="90px">
                                 </div>
