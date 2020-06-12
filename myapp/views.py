@@ -15,13 +15,7 @@ def weather(request):
     dict1 = {
         # 'location': location,
         'temperature': r['main']['temp'],
-        # 'description': r['weather'][0]['description'],
-        # 'icon': r['weather'][0]['icon'],
-        # 'wind_speed': r['wind']['speed'],
-        # 'humidity': r['main']['humidity'],
-        # 'wind_deg': r['wind']['deg'],
-        # 'time_of_data_cal': r['dt'],
-
+      
         # 'red1': 'Precautions and Carries to be taken at this place in this week.' if 'temperature' < '20' else 'Precautions and Carries to be taken at this place in this week.',
         # 'red2': 'The place is enough cold to make you sick.' if 'temperature' < '20' else 'The place has high temperature. Bad atmospheremmay damage skin.',
         # 'red3': 'Carry warm clothes with you.' if 'temperature' < '20' else 'Wear cotton clothes. Loose clothes made of linen would be very comfortable.',
@@ -30,24 +24,7 @@ def weather(request):
     }
 
     print(dict1)
-    # t = 'temperature'
-    # print(dict1.get(t))
-
-    # if dict1.get(t) < 20:
-    #     dict2 = {
-    #         'red1': 'Danger',
-    #         'red2': 'Be Careful',
-    #         'red3': 'Hell',
-    #     }
-    # else:
-    #     dict2 = {
-    #         'red1': 'abovee 20',
-    #         'red2': 'ldflksdf',
-    #         'red3': 'zxczxczxczxcz',
-    #     }
-    #     a = 'red1'
-    #     print(dict2.get(a))
-
+ 
     if dict1['temperature'] <= 10:
         dict1 = {
             'red1': 'Precautions and Carries must be taken at this place in this week.',
@@ -128,21 +105,9 @@ def weather_details(request):
         if r['cod'] != '404':
             print(r)
             dict1 = {
-                # 'location': location,
-                'temperature': r['main']['temp'],
-                # 'description': r['weather'][0]['description'],
-                # 'icon': r['weather'][0]['icon'],
-                # 'wind_speed': r['wind']['speed'],
-                # 'humidity': r['main']['humidity'],
-                # 'wind_deg': r['wind']['deg'],
-                # 'time_of_data_cal': r['dt'],
-
-                # 'red1': 'Precautions and Carries to be taken at this place in this week.' if 'temperature' < '20' else 'Precautions and Carries to be taken at this place in this week.',
-                # 'red2': 'The place is enough cold to make you sick.' if 'temperature' < '20' else 'The place has high temperature. Bad atmosphere may damage skin.',
-                # 'red3': 'Carry warm clothes with you.' if 'temperature' < '20' else 'Wear cotton clothes. Loose clothes made of linen would be very comfortable.',
-                # 'red4': 'Sudden temperature change may cause your health to spoil.' if 'temperature' < '20' else 'No environment for tourism or sight-seeing.',
-
+                'temperature': r['main']['temp'],           
             }
+            
             print(dict1)
 
             if dict1['temperature'] <= 10:
