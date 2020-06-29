@@ -10,7 +10,8 @@
 - OWM Forecast Data is available in JSON format.	
 
 ### Live Demo
-https://pyweather.purveshmakode.com/ OR
+https://pyweather.purveshmakode.com/ 
+OR
 https://pyweather4u.herokuapp.com/
 
 ### Installation
